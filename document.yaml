@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.investa.id
+    description: API INVESTA INDONESIA
+paths:
+  /project/count/pendan:
+    get:
+      summary: Menampilkan seluruh data proyek pertanian
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: Menambahkan data project pertanian
+      description: -
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+                schema:
+                  type: array
+                  items:
+                    type: string
+    delete:
+      summary: Menghapus data proyek pertanian
+      description: -
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+                schema:
+                  type: array
+                  items:
+                    type: string
+  /project/count/investor:
+    get:
+      summary: Menampilkan total investor
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /project/count/proyek:
+    get:
+      summary: Menampilkan total proyek
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /project/count/dana:
+    get:
+      summary: Menampilkan total dana ang telah masuk
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /login:
+    post:
+      summary: Login user
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /register:
+    post:
+      summary: Mendaftarkan user
+      description: Fetch all project data
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
