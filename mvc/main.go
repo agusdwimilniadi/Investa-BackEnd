@@ -1,7 +1,9 @@
 package main
 
+import "github.com/go-delve/delve/pkg/config"
+
 func Migration() {
-	DB.AutoMigrate()
+	config.DB.AutoMigrate()
 }
 
 type User struct {
