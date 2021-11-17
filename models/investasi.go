@@ -4,6 +4,10 @@ import (
 	"time"
 )
 
+func (DetailInvestasi) TableName() string {
+	return "detail_investasi"
+}
+
 type DetailInvestasi struct {
 	ID          uint        `gorm:"primaryKey" json:"id"`
 	CreatedAt   time.Time   `json:"created_at"`

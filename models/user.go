@@ -6,6 +6,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func (User) TableName() string {
+	return "user"
+}
+
 type User struct {
 	ID         uint           `gorm:"primaryKey" json:"id"`
 	CreatedAt  time.Time      `json:"created_at"`

@@ -6,6 +6,10 @@ import (
 	"gorm.io/gorm"
 )
 
+func (ProyekMitra) TableName() string {
+	return "proyek_mitra"
+}
+
 type ProyekMitra struct {
 	ID                   uint           `gorm:"primaryKey" json:"id"`
 	CreatedAt            time.Time      `json:"created_at"`
