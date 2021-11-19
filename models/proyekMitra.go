@@ -6,9 +6,9 @@ import (
 	"gorm.io/gorm"
 )
 
-// func (ProyekMitra) TableName() string {
-// 	return "proyek_mitra"
-// }
+func (ProyekMitra) TableName() string {
+	return "proyek_mitra"
+}
 
 type ProyekMitra struct {
 	ID                   uint           `gorm:"primaryKey" json:"id"`
@@ -30,6 +30,6 @@ type ProyekMitra struct {
 	UserProyekID         uint           `json:"user_id"`
 	SektorId             uint           `json:"sektor_id"`
 	Sektor               Sektor         `json:"sektor"`
-	BankId               uint           `json:"bank_id"`
-	Bank                 BankCode       `json:"bank"`
+	BankCodeId           uint           `json:"bank_id"`
+	Bank                 BankCode       `gorm:"foreignKey:BankCodeId" json:"bank"`
 }
