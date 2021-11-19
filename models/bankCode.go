@@ -8,5 +8,5 @@ type BankCode struct {
 	Id         uint          `gorm:"primaryKey" json:"id"`
 	NamaBank   string        `json:"namaBank"`
 	KodeBank   string        `json:"kodeBank"`
-	ProyekBank []ProyekMitra `json:"proyek_bank" gorm:"foreignKey:BankId"`
+	ProyekBank []ProyekMitra `json:"proyek_bank"`
 }

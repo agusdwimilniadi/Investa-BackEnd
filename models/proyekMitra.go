@@ -6,15 +6,15 @@ import (
 	"gorm.io/gorm"
 )
 
-func (ProyekMitra) TableName() string {
-	return "proyek_mitra"
-}
+// func (ProyekMitra) TableName() string {
+// 	return "proyek_mitra"
+// }
 
 type ProyekMitra struct {
 	ID                   uint           `gorm:"primaryKey" json:"id"`
 	CreatedAt            time.Time      `json:"created_at"`
 	UpdatedAt            time.Time      `json:"updated_at"`
-	DeletedAt            gorm.DeletedAt `gorm:"index" json:"deleted_at"`
+	DeletedAt            gorm.DeletedAt `gorm:"index" json:"deletedAt"`
 	NamaKelompokTani     string         `json:"nama_kelompok_tani"`
 	NamaProyek           string         `json:"nama_proyek"`
 	PengalamanBertani    int            `json:"pengalaman_bertani"`
@@ -27,8 +27,7 @@ type ProyekMitra struct {
 	StatusMitra          bool           `json:"status_mitra"`
 	LinkDokumen          string         `json:"link_dokumen"`
 	LinkFoto             string         `json:"link_foto"`
-	UserID               uint           `json:"user_id"`
-	User                 User           `json:"user"`
+	UserProyekID         uint           `json:"user_id"`
 	SektorId             uint           `json:"sektor_id"`
 	Sektor               Sektor         `json:"sektor"`
 	BankId               uint           `json:"bank_id"`

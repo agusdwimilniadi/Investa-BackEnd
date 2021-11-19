@@ -20,9 +20,10 @@ func ConnectDB() {
 	Migration()
 }
 func Migration() {
-	DB.AutoMigrate(&models.User{})
 	DB.AutoMigrate(&models.BankCode{})
 	DB.AutoMigrate(&models.Sektor{})
+	DB.AutoMigrate(&models.UserProyek{})
+	DB.AutoMigrate(&models.UserInvestasi{})
 	DB.AutoMigrate(&models.ProyekMitra{})
-	DB.AutoMigrate(&models.DetailInvestasi{})
+	DB.AutoMigrate(&models.Investasi{})
 }
