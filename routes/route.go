@@ -2,7 +2,7 @@ package routes
 
 import (
 	bank "investaBackend/controllers/bank"
-	loginInvestasi "investaBackend/controllers/userInvestasi"
+	loginInvestasi "investaBackend/controllers/userInvestor"
 	loginProyek "investaBackend/controllers/userProyek"
 
 	middlewares "investaBackend/middlewares"
@@ -16,7 +16,13 @@ func New() *echo.Echo {
 	middlewares.LogMiddleware(e)
 	e.POST("/add/bank", bank.InsertBank)
 
-	e.POST("/register/proyek", loginProyek.RegisterUserProyek)
-	e.POST("/register/investasi", loginInvestasi.RegiterUserInvestasi)
+	eLogin := e.Group("/login")
+	eLogin.GET("/proyek", loginProyek.LoginUserProyek)
+	eLogin.GET("/investasi", loginInvestasi.LoginUserInvestor)
+
+	eRegister := e.Group("/register")
+
+	eRegister.POST("/proyek", loginProyek.RegisterUserProyek)
+	eRegister.POST("/investasi", loginInvestasi.RegisterUserInvestor)
 	return e
 }

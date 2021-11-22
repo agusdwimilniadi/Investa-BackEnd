@@ -1,21 +1,21 @@
-package loginproyek
+package userinvestor
 
 import (
 	"investaBackend/configs"
 	"investaBackend/middlewares"
-	userProyek "investaBackend/models"
+	"investaBackend/models"
 	"investaBackend/models/response"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 )
 
-func RegisterUserProyek(e echo.Context) error {
-	var userProyek userProyek.UserProyek
+func RegisterUserInvestor(e echo.Context) error {
+	var userInvestor models.UserInvestasi
 
-	e.Bind(&userProyek)
-	configs.DB.Create(&userProyek)
-	if userProyek.Password == "" {
+	e.Bind(&userInvestor)
+	configs.DB.Create(&userInvestor)
+	if userInvestor.Password == "" {
 		return e.JSON(http.StatusBadRequest, response.BaseResponse{
 			Code:    http.StatusBadRequest,
 			Message: "Password Kosong",
@@ -26,24 +26,24 @@ func RegisterUserProyek(e echo.Context) error {
 	return e.JSON(http.StatusOK, response.BaseResponse{
 		Code:    http.StatusOK,
 		Message: "Success",
-		Data:    userProyek,
+		Data:    userInvestor,
 	})
 }
 
-func LoginUserProyek(e echo.Context) error {
-	var userProyek userProyek.UserProyek
+func LoginUserInvestor(e echo.Context) error {
+	var userInvestor models.UserInvestasi
 
-	e.Bind(&userProyek)
+	e.Bind(&userInvestor)
 
-	// err := configs.DB.Where("email = ? AND password = ?", userProyek.Email, userProyek.Password).First(&userProyek)
-	if err := configs.DB.Where("email = ? AND password = ?", userProyek.Email, userProyek.Password).First(&userProyek).Error; err != nil {
+	// err := configs.DB.Where("email = ? AND password = ?", userInvestor.Email, userInvestor.Password).First(&userInvestor)
+	if err := configs.DB.Where("email = ? AND password = ?", userInvestor.Email, userInvestor.Password).First(&userInvestor).Error; err != nil {
 		return e.JSON(http.StatusBadRequest, response.BaseResponse{
 			Code:    http.StatusBadRequest,
 			Message: "Email Password salah",
 			Data:    nil,
 		})
 	}
-	if userProyek.Password == "" {
+	if userInvestor.Password == "" {
 		return e.JSON(http.StatusBadRequest, response.BaseResponse{
 			Code:    http.StatusBadRequest,
 			Message: "Password Kosong",
@@ -52,7 +52,7 @@ func LoginUserProyek(e echo.Context) error {
 	}
 
 	// GENERATE TOKEN
-	token, errors := middlewares.GenereteTokenJWT(int(userProyek.ID))
+	token, errors := middlewares.GenereteTokenJWT(int(userInvestor.ID))
 
 	if errors != nil {
 		return e.JSON(http.StatusInternalServerError, response.BaseResponse{
@@ -66,9 +66,9 @@ func LoginUserProyek(e echo.Context) error {
 		Code:    http.StatusOK,
 		Message: "Succes",
 		Data: map[string]string{
-			"Role":         "User Proyek",
-			"Nama Lengkap": userProyek.Name,
-			"Email":        userProyek.Email,
+			"Role":         "User Investor",
+			"Nama Lengkap": userInvestor.Name,
+			"Email":        userInvestor.Email,
 			"token":        token,
 		},
 	})
