@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	_middleware "investaBackend/app/middlewares"
+	"investaBackend/helpers/encrypt"
 	"time"
 )
 
@@ -12,9 +13,6 @@ type UserUsecase struct {
 	repo UserRepoInterface
 	ctx  time.Duration
 	jwt  *_middleware.ConfigJWT
-
-	//usecase lain
-	//repolain
 }
 
 func NewUsecase(userRepo UserRepoInterface, contextTimeout time.Duration, configJWT *_middleware.ConfigJWT) UserUseCaseInterface {
@@ -25,24 +23,50 @@ func NewUsecase(userRepo UserRepoInterface, contextTimeout time.Duration, config
 	}
 }
 
-func (usecase *UserUsecase) Login(domain Domain, ctx context.Context) (Domain, error) {
-	if domain.Email == "" {
-		return Domain{}, errors.New("Email Kosong")
+func (usecase *UserUsecase) Login(ctx context.Context, emails, password string) (string, error) {
+	if emails == "" {
+		return "", errors.New("email kosong")
 	}
-	if domain.Password == "" {
-		return Domain{}, errors.New("Password Kosong")
+	if password == "" {
+		return "", errors.New("password kosong")
 	}
 
-	user, err := usecase.repo.Login(domain, ctx)
+	user, err := usecase.repo.GetByEmail(ctx, emails)
+
 	if err != nil {
-		return Domain{}, err
+		return "", err
 	}
-	tokens := usecase.jwt.GenererateToken(user.Id)
-	user.Token = tokens
+	// hash, err := encrypt.Hash(domain.Password)
+	if !encrypt.ValidateHash(password, user.Password) {
+		return "", errors.New("email atau password salah")
+	}
+	tokens := usecase.jwt.GenererateToken(user.ID)
 
-	return user, nil
+	return tokens, nil
 }
 
 func (usecase *UserUsecase) GetAllUsers(ctx context.Context) ([]Domain, error) {
 	return []Domain{}, nil
+}
+
+func (uc *UserUsecase) Register(ctx context.Context, userDomain *Domain) error {
+	ctx, cancel := context.WithTimeout(ctx, uc.ctx)
+	defer cancel()
+
+	existedUser, err := uc.repo.GetByEmail(ctx, userDomain.Email)
+	if existedUser != (Domain{}) {
+		return errors.New("email sudah digunakan, cari email lain")
+	}
+	userDomain.Password, err = encrypt.Hash(userDomain.Password)
+
+	if err != nil {
+		return errors.New("kesalahan encrypt password")
+	}
+	err2 := uc.repo.Register(userDomain, ctx)
+
+	if err2 != nil {
+		return err2
+	}
+
+	return nil
 }

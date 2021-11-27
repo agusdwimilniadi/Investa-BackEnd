@@ -4,14 +4,20 @@ import (
 	_middleware "investaBackend/app/middlewares"
 	"investaBackend/app/routes"
 	bankUsecase "investaBackend/business/bank"
+	investUseCase "investaBackend/business/investasi"
+
 	userUsecase "investaBackend/business/users"
 	bankController "investaBackend/controllers/bank"
+	investController "investaBackend/controllers/investasi"
+
 	userController "investaBackend/controllers/users"
 	bankRepo "investaBackend/drivers/databases/bank"
+	investRepo "investaBackend/drivers/databases/investasi"
 	userRepo "investaBackend/drivers/databases/users"
 
 	userInvestasiUsecase "investaBackend/business/user_investasi"
 	userInvestasiController "investaBackend/controllers/user_investasi"
+	sektorRepo "investaBackend/drivers/databases/sektor"
 	userInvestorRepo "investaBackend/drivers/databases/user_investasi"
 
 	"investaBackend/drivers/mysql"
@@ -38,9 +44,12 @@ func init() {
 }
 
 func dbMigrate(db *gorm.DB) {
-	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&bankRepo.Bank{})
+	db.AutoMigrate(&sektorRepo.Sektor{})
+	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&userInvestorRepo.UserInvestasi{})
+	db.AutoMigrate(&investRepo.InvestasiRepository{})
+
 }
 
 func main() {
@@ -75,10 +84,15 @@ func main() {
 	bankUseCaseInterface := bankUsecase.NewBankUseCase(bankRepoInterface, timeoutContext)
 	bankControllerInterface := bankController.NewBankController(bankUseCaseInterface)
 
+	investRepoInterface := investRepo.NewInvestasiRepository(db)
+	investUseCaseInterface := investUseCase.NewInvestasiUseCase(investRepoInterface, timeoutContext)
+	investController := investController.NewInvestasiController(investUseCaseInterface)
+
 	routesInit := routes.RouteControllerList{
 		UserController:         *userControllerInterface,
 		BankController:         *bankControllerInterface,
 		UserInvestorController: *userInvestorControllerInterface,
+		InvestasiController:    *investController,
 	}
 
 	routesInit.RouteRegister(e)

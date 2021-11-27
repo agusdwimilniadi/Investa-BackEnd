@@ -2,6 +2,7 @@ package investasi
 
 import (
 	"investaBackend/business/investasi"
+	"investaBackend/drivers/databases/proyek_mitra"
 
 	"gorm.io/gorm"
 )
@@ -12,8 +13,7 @@ type Investasi struct {
 	ProyekID        uint
 	Nominal         int
 	LinkBuktiTf     string
-	// Proyek          ProyekMitra `json:"proyek"`
-
+	Proyek          proyek_mitra.ProyekMitra `json:"proyek"`
 }
 
 func (invest *Investasi) ToDomain() investasi.DomainInvestasi {

@@ -2,28 +2,26 @@ package users
 
 import (
 	"context"
-	"time"
 
 	"gorm.io/gorm"
 )
 
 type Domain struct {
-	Id        uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-	Email     string
-	Name      string
-	Password  string
-	Token     string
+	gorm.Model
+	Email    string
+	Name     string
+	Password string
+	Token    string
 }
 
 type UserUseCaseInterface interface {
-	Login(domain Domain, ctx context.Context) (Domain, error)
+	Login(ctx context.Context, email, password string) (string, error)
 	GetAllUsers(ctx context.Context) ([]Domain, error)
+	Register(ctx context.Context, domain *Domain) error
 }
 
 type UserRepoInterface interface {
-	Login(domain Domain, ctx context.Context) (Domain, error)
 	GetAllUsers(ctx context.Context) ([]Domain, error)
+	Register(domain *Domain, ctx context.Context) error
+	GetByEmail(ctx context.Context, email string) (Domain, error)
 }

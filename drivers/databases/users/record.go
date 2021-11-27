@@ -11,25 +11,28 @@ type User struct {
 	Name     string
 	Email    string
 	Password string
+	// ProyekUser []proyek_mitra.ProyekMitra
 }
 
-func (user User) ToDomain() users.Domain {
+func (user *User) ToDomain() users.Domain {
 	return users.Domain{
-		Id:        user.ID,
-		CreatedAt: user.CreatedAt,
-		UpdatedAt: user.UpdatedAt,
-		DeletedAt: user.DeletedAt,
-		Email:     user.Email,
-		Name:      user.Name,
-		Password:  user.Password,
+		Model: gorm.Model{
+			ID:        user.ID,
+			CreatedAt: user.CreatedAt,
+			UpdatedAt: user.UpdatedAt,
+			DeletedAt: user.DeletedAt,
+		},
+		Email:    user.Email,
+		Name:     user.Name,
+		Password: user.Password,
 	}
 
 }
 
-func FromDomain(domain users.Domain) User {
-	return User{
+func FromDomain(domain users.Domain) *User {
+	return &User{
 		Model: gorm.Model{
-			ID:        domain.Id,
+			ID:        domain.ID,
 			CreatedAt: domain.CreatedAt,
 			UpdatedAt: domain.UpdatedAt,
 			DeletedAt: domain.DeletedAt,

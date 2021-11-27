@@ -20,7 +20,7 @@ type UserResponse struct {
 
 func FromDomain(domain users.Domain) UserResponse {
 	return UserResponse{
-		Id:        domain.Id,
+		Id:        domain.ID,
 		CreatedAt: domain.CreatedAt,
 		UpdatedAt: domain.UpdatedAt,
 		DeletedAt: domain.DeletedAt,

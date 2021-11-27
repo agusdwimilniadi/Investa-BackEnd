@@ -1,8 +1,13 @@
-// package sektor
+package sektor
 
-// type Sektor struct {
-// 	ID int
-// 	NamaSektor string
-// }
+// import "investaBackend/drivers/databases/proyek_mitra"
 
-// func (rec *Sektor) ToDomain
+func (Sektor) TableName() string {
+	return "sektor"
+}
+
+type Sektor struct {
+	ID         int `gorm:"primaryKey"`
+	NamaSektor string
+	// ProyekSektor proyek_mitra.ProyekMitra
+}

@@ -11,6 +11,7 @@ type UserInvestasi struct {
 	Name     string
 	Email    string
 	Password string
+	// InvestasiUser []investasi.Investasi
 }
 
 func (user UserInvestasi) ToDomain() user_investasi.Domain {

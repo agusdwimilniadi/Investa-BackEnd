@@ -1,6 +1,9 @@
 package bank
 
-import "investaBackend/business/bank"
+import (
+	"investaBackend/business/bank"
+	// "investaBackend/drivers/databases/proyek_mitra"
+)
 
 func (Bank) TableName() string {
 	return "bank_code"
@@ -10,8 +13,7 @@ type Bank struct {
 	Id       uint `gorm:"primaryKey"`
 	NamaBank string
 	KodeBank string
-	// ProyekBank []ProyekMitra
-
+	// ProyekBank []proyek_mitra.ProyekMitra `gorm:"foreignKey:BankId"`
 }
 
 func (banks *Bank) ToDomain() bank.Domain {

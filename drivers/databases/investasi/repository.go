@@ -11,14 +11,18 @@ type InvestasiRepository struct {
 	db *gorm.DB
 }
 
-func NewInvestasiRepository(gormDB *gorm.DB) investasi.DomainInvestasiRepository {
+func NewInvestasiRepository(gormDB *gorm.DB) investasi.Repository {
 	return &InvestasiRepository{
 		db: gormDB,
 	}
 }
 
-func (repo *InvestasiRepository) GetAllInvestor(domain investasi.DomainInvestasi, ctx context.Context) (, error) {
+func (repo *InvestasiRepository) InsertInvestasi(domain investasi.DomainInvestasi, ctx context.Context) (investasi.DomainInvestasi, error) {
 	investasiDb := FromDomain(domain)
+	err := repo.db.Create(&investasiDb).Error
 
-	err := repo.db.Find()
+	if err != nil {
+		return investasi.DomainInvestasi{}, err
+	}
+	return investasiDb.ToDomain(), nil
 }
