@@ -1,0 +1,20 @@
+{
+    "debug": true,
+    "server": {
+      "address": ":8000"
+    },
+    "context":{
+      "timeout":2
+    },
+    "database": {
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "pass": "123edsaq1",
+        "name": "investa_backend_test"
+    },
+    "jwt" : {
+      "secret" : "supersecret12345!@#$%",
+      "expired" : 72
+    }
+}
