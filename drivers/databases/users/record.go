@@ -2,16 +2,17 @@ package users
 
 import (
 	"investaBackend/business/users"
+	"investaBackend/drivers/databases/proyek_mitra"
 
 	"gorm.io/gorm"
 )
 
 type User struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
-	// ProyekUser []proyek_mitra.ProyekMitra
+	Name       string
+	Email      string
+	Password   string
+	ProyekUser []proyek_mitra.ProyekMitra `gorm:"foreignKey:UserId"`
 }
 
 func (user *User) ToDomain() users.Domain {
@@ -22,9 +23,10 @@ func (user *User) ToDomain() users.Domain {
 			UpdatedAt: user.UpdatedAt,
 			DeletedAt: user.DeletedAt,
 		},
-		Email:    user.Email,
-		Name:     user.Name,
-		Password: user.Password,
+		Email:      user.Email,
+		Name:       user.Name,
+		Password:   user.Password,
+		ProyekUser: user.ProyekUser,
 	}
 
 }

@@ -2,7 +2,9 @@ package proyek_mitra
 
 import (
 	"investaBackend/drivers/databases/bank"
+	"investaBackend/drivers/databases/investasi"
 	"investaBackend/drivers/databases/sektor"
+
 	"time"
 
 	"gorm.io/gorm"
@@ -29,9 +31,10 @@ type ProyekMitra struct {
 	StatusMitra          bool           `json:"status_mitra"`
 	LinkDokumen          string         `json:"link_dokumen"`
 	LinkFoto             string         `json:"link_foto"`
-	UserID               uint           `gorm:"foreignKey:User" json:"user_id"`
+	UserID               uint           `json:"user_id"`
 	SektorId             uint           `json:"sektor_id"`
 	Sektor               sektor.Sektor  `gorm:"foreignKey:SektorId" json:"sektor"`
 	BankId               uint           `json:"bank_id"`
 	Bank                 bank.Bank      `gorm:"foreignKey:BankCodeId" json:"bank"`
+	InvestasiUser        []investasi.Investasi
 }

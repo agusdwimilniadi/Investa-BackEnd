@@ -3,6 +3,7 @@ package users
 import (
 	"context"
 	"errors"
+	"reflect"
 
 	_middleware "investaBackend/app/middlewares"
 	"investaBackend/helpers/encrypt"
@@ -53,10 +54,11 @@ func (uc *UserUsecase) Register(ctx context.Context, userDomain *Domain) error {
 	ctx, cancel := context.WithTimeout(ctx, uc.ctx)
 	defer cancel()
 
-	existedUser, err := uc.repo.GetByEmail(ctx, userDomain.Email)
-	if existedUser != (Domain{}) {
+	existedUser, _ := uc.repo.GetByEmail(ctx, userDomain.Email)
+	if !reflect.DeepEqual(existedUser, Domain{}) {
 		return errors.New("email sudah digunakan, cari email lain")
 	}
+	var err error
 	userDomain.Password, err = encrypt.Hash(userDomain.Password)
 
 	if err != nil {

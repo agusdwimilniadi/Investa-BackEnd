@@ -36,7 +36,7 @@ func (repo *UserRepository) GetByEmail(ctx context.Context, emailCheck string) (
 	rec := User{}
 	err := repo.db.Where("email = ?", emailCheck).First(&rec).Error
 	if err != nil {
-		return users.Domain{}, errors.New("Email atau password salah")
+		return users.Domain{}, errors.New("email atau password salah")
 	}
 	return rec.ToDomain(), nil
 }
