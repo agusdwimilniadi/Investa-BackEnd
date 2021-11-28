@@ -5,18 +5,23 @@ import (
 	"investaBackend/app/routes"
 	bankUsecase "investaBackend/business/bank"
 	investUseCase "investaBackend/business/investasi"
+	proyekMitraUseCase "investaBackend/business/proyek_mitra"
 
 	userUsecase "investaBackend/business/users"
 	bankController "investaBackend/controllers/bank"
 	investController "investaBackend/controllers/investasi"
+	proyekMitraController "investaBackend/controllers/proyek_mitra"
 
 	userController "investaBackend/controllers/users"
 	bankRepo "investaBackend/drivers/databases/bank"
+	proyekMitraRepo "investaBackend/drivers/databases/proyek_mitra"
+
 	investRepo "investaBackend/drivers/databases/investasi"
 	userRepo "investaBackend/drivers/databases/users"
 
 	userInvestasiUsecase "investaBackend/business/user_investasi"
 	userInvestasiController "investaBackend/controllers/user_investasi"
+	proyekMitra "investaBackend/drivers/databases/proyek_mitra"
 	sektorRepo "investaBackend/drivers/databases/sektor"
 	userInvestorRepo "investaBackend/drivers/databases/user_investasi"
 
@@ -48,8 +53,8 @@ func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(&sektorRepo.Sektor{})
 	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&userInvestorRepo.UserInvestasi{})
+	db.AutoMigrate(&proyekMitra.ProyekMitra{})
 	db.AutoMigrate(&investRepo.InvestasiRepository{})
-
 }
 
 func main() {
@@ -88,11 +93,16 @@ func main() {
 	investUseCaseInterface := investUseCase.NewInvestasiUseCase(investRepoInterface, timeoutContext)
 	investController := investController.NewInvestasiController(investUseCaseInterface)
 
+	proyekMitraInterface := proyekMitraRepo.NewProyekMitraRepository(db)
+	proyekMitraUseCaseInterface := proyekMitraUseCase.NewProyekMitraUseCase(proyekMitraInterface, timeoutContext)
+	proyekMitraControllerInterface := proyekMitraController.NewProyekMitraController(proyekMitraUseCaseInterface)
+
 	routesInit := routes.RouteControllerList{
 		UserController:         *userControllerInterface,
 		BankController:         *bankControllerInterface,
 		UserInvestorController: *userInvestorControllerInterface,
 		InvestasiController:    *investController,
+		ProyekMitraController:  *proyekMitraControllerInterface,
 	}
 
 	routesInit.RouteRegister(e)

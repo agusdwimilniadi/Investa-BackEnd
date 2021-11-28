@@ -2,6 +2,8 @@ package routes
 
 import (
 	bankController "investaBackend/controllers/bank"
+	ProyekMitraController "investaBackend/controllers/proyek_mitra"
+
 	investasi "investaBackend/controllers/investasi"
 	userInvestasiController "investaBackend/controllers/user_investasi"
 
@@ -12,8 +14,10 @@ import (
 )
 
 type RouteControllerList struct {
-	UserController         userController.UserController
-	BankController         bankController.BankController
+	UserController        userController.UserController
+	BankController        bankController.BankController
+	ProyekMitraController ProyekMitraController.ProyekMitraController
+
 	UserInvestorController userInvestasiController.UserInvestasiController
 	InvestasiController    investasi.InvestasiController
 
@@ -31,4 +35,11 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 	c.POST("/bank", controller.BankController.InsertBank)
 
 	c.POST("/investasi", controller.InvestasiController.InsertInvestasi)
+
+	// Proyek
+	c.GET("/proyek", controller.ProyekMitraController.GetAllDataProyek)
+	c.POST("/proyek", controller.ProyekMitraController.CreateProyekController)
+
+	c.GET("/proyek/:id", controller.ProyekMitraController.GetAllDataByIdController)
+
 }

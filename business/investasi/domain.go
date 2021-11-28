@@ -2,7 +2,6 @@ package investasi
 
 import (
 	"context"
-	"investaBackend/drivers/databases/proyek_mitra"
 
 	"gorm.io/gorm"
 )
@@ -13,7 +12,7 @@ type DomainInvestasi struct {
 	ProyekID        uint
 	Nominal         int
 	LinkBuktiTf     string
-	Proyek          proyek_mitra.ProyekMitra
+	// Proyek          proyek_mitra.ProyekMitra
 }
 
 type Usecase interface {
