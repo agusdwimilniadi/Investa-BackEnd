@@ -2,16 +2,17 @@ package user_investasi
 
 import (
 	"investaBackend/business/user_investasi"
+	"investaBackend/drivers/databases/investasi"
 
 	"gorm.io/gorm"
 )
 
 type UserInvestasi struct {
 	gorm.Model
-	Name     string
-	Email    string
-	Password string
-	// InvestasiUser []investasi.Investasi
+	Name          string
+	Email         string
+	Password      string
+	InvestasiUser []investasi.Investasi
 }
 
 func (user UserInvestasi) ToDomain() user_investasi.Domain {

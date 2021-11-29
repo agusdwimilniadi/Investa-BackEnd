@@ -12,7 +12,8 @@ type Investasi struct {
 	ProyekID        uint
 	Nominal         int
 	LinkBuktiTf     string
-	// Proyek          proyek_mitra.ProyekMitra `json:"proyek"`
+	ProyekMitraId   uint
+	UserInvestasiId uint
 }
 type TotalInvestasi struct {
 	Total int

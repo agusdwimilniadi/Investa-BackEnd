@@ -2,7 +2,7 @@ package bank
 
 import (
 	"investaBackend/business/bank"
-	// "investaBackend/drivers/databases/proyek_mitra"
+	"investaBackend/drivers/databases/proyek_mitra"
 )
 
 func (Bank) TableName() string {
@@ -10,10 +10,10 @@ func (Bank) TableName() string {
 }
 
 type Bank struct {
-	Id       uint `gorm:"primaryKey"`
-	NamaBank string
-	KodeBank string
-	// ProyekBank []proyek_mitra.ProyekMitra `gorm:"foreignKey:BankId"`
+	Id         uint `gorm:"primaryKey"`
+	NamaBank   string
+	KodeBank   string
+	ProyekBank []proyek_mitra.ProyekMitra
 }
 
 func (banks *Bank) ToDomain() bank.Domain {
