@@ -19,11 +19,11 @@ type Domain struct {
 }
 
 type UserInvestasiUseCaseInterface interface {
-	Login(domain Domain, ctx context.Context) (Domain, error)
-	// GetAllUsers(ctx context.Context) ([]Domain, error)
+	Login(ctx context.Context, email, password string) (string, error)
+	Register(ctx context.Context, domain *Domain) error
 }
 
 type UserInvestasiRepoInterface interface {
-	Login(domain Domain, ctx context.Context) (Domain, error)
-	// GetAllUsers(ctx context.Context) ([]Domain, error)
+	Register(domain *Domain, ctx context.Context) error
+	GetByEmail(ctx context.Context, email string) (Domain, error)
 }

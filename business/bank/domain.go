@@ -1,12 +1,14 @@
 package bank
 
-import "context"
+import (
+	"context"
+)
 
 type Domain struct {
 	Id       uint
 	NamaBank string
 	KodeBank string
-	// ProyekBank []ProyekMitra
+	// ProyekBank []proyek_mitra
 }
 
 type UseCase interface {

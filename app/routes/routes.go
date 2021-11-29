@@ -2,11 +2,9 @@ package routes
 
 import (
 	bankController "investaBackend/controllers/bank"
-	ProyekMitraController "investaBackend/controllers/proyek_mitra"
-
 	investasi "investaBackend/controllers/investasi"
+	ProyekMitraController "investaBackend/controllers/proyek_mitra"
 	userInvestasiController "investaBackend/controllers/user_investasi"
-
 	userController "investaBackend/controllers/users"
 
 	"github.com/labstack/echo/v4"
@@ -14,32 +12,37 @@ import (
 )
 
 type RouteControllerList struct {
-	UserController        userController.UserController
-	BankController        bankController.BankController
-	ProyekMitraController ProyekMitraController.ProyekMitraController
-
+	UserController         userController.UserController
+	BankController         bankController.BankController
+	ProyekMitraController  ProyekMitraController.ProyekMitraController
 	UserInvestorController userInvestasiController.UserInvestasiController
 	InvestasiController    investasi.InvestasiController
-
-	JWTConfig middleware.JWTConfig
+	JWTConfig              middleware.JWTConfig
 }
 
 func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
+	// USER PROYEK
 	users := c.Group("/user")
-	users.GET("/login", controller.UserController.Login)
-	users.POST("/register", controller.UserController.Register)
+	users.GET("/masuk", controller.UserController.Login)
+	users.POST("/daftar", controller.UserController.Register)
 
+	// USER INVESTOR
 	usersInvestor := c.Group("/investor")
-	usersInvestor.POST("/login", controller.UserInvestorController.Login)
+	usersInvestor.GET("/masuk", controller.UserInvestorController.Login)
+	usersInvestor.POST("/daftar", controller.UserInvestorController.Register)
+
+	// Proyek
+	c.GET("/proyek", controller.ProyekMitraController.GetAllDataProyek)
+	c.POST("/proyek", controller.ProyekMitraController.CreateProyekController, middleware.JWTWithConfig(controller.JWTConfig))
+	c.PUT("/proyek/:id", controller.ProyekMitraController.UpdateProyekController)
+	c.GET("/proyek/:id", controller.ProyekMitraController.GetAllDataByIdController)
+	c.DELETE("/proyek/:id", controller.ProyekMitraController.DeleteProyekController)
+	c.GET("/proyek/sektor/:id", controller.ProyekMitraController.GetAllDataBySektorController)
+	// c.GET("/proyek/total/:id", controller.ProyekMitraController.GetAllDataBySektorController)
 
 	c.POST("/bank", controller.BankController.InsertBank)
 
 	c.POST("/investasi", controller.InvestasiController.InsertInvestasi)
-
-	// Proyek
-	c.GET("/proyek", controller.ProyekMitraController.GetAllDataProyek)
-	c.POST("/proyek", controller.ProyekMitraController.CreateProyekController)
-
-	c.GET("/proyek/:id", controller.ProyekMitraController.GetAllDataByIdController)
+	c.GET("/investasi/:id", controller.InvestasiController.TotalInvestasiByIdController)
 
 }

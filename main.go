@@ -54,7 +54,8 @@ func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(&userRepo.User{})
 	db.AutoMigrate(&userInvestorRepo.UserInvestasi{})
 	db.AutoMigrate(&proyekMitra.ProyekMitra{})
-	db.AutoMigrate(&investRepo.InvestasiRepository{})
+	db.AutoMigrate(&investRepo.Investasi{})
+
 }
 
 func main() {
@@ -103,6 +104,7 @@ func main() {
 		UserInvestorController: *userInvestorControllerInterface,
 		InvestasiController:    *investController,
 		ProyekMitraController:  *proyekMitraControllerInterface,
+		JWTConfig:              jwt.Init(),
 	}
 
 	routesInit.RouteRegister(e)

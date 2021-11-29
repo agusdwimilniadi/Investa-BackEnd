@@ -3,9 +3,7 @@ package userinvestasi
 import (
 	"investaBackend/business/user_investasi"
 	"investaBackend/controllers"
-	_request "investaBackend/controllers/user_investasi/request"
-	_response "investaBackend/controllers/user_investasi/response"
-
+	"investaBackend/controllers/user_investasi/request"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -21,20 +19,40 @@ func NewUserInvestasiController(uc user_investasi.UserInvestasiUseCaseInterface)
 	}
 }
 
-func (controller UserInvestasiController) Login(c echo.Context) error {
+func (controller *UserInvestasiController) Login(c echo.Context) error {
 	ctx := c.Request().Context()
-	var userLogin _request.UserInvestorLogin
-	err := c.Bind(&userLogin)
+	var userLogin request.UserInvestorLogin
+	c.Bind(&userLogin)
+
+	token, err := controller.usecase.Login(ctx, userLogin.Email, userLogin.Password)
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusBadRequest, "Email atau password salah", err)
+	}
+	responses := struct {
+		Email string `json:"email"`
+		Token string `json:"token"`
+	}{
+		Email: userLogin.Email,
+		Token: token,
+	}
+
+	return controllers.SuccessResponse(c, responses)
+}
+
+func (ctrl *UserInvestasiController) Register(c echo.Context) error {
+	ctx := c.Request().Context()
+
+	req := request.UserRegister{}
+	err := c.Bind(&req)
 
 	if err != nil {
-		return controllers.ErrorResponse(c, http.StatusInternalServerError, "Error bind", err)
+		return controllers.ErrorResponse(c, http.StatusBadRequest, " ", err)
 	}
-	user, err := controller.usecase.Login(*userLogin.ToDomain(), ctx)
-	if err != nil {
-		return controllers.ErrorResponse(c, http.StatusNotFound, "Email password salah", err)
+	err2 := ctrl.usecase.Register(ctx, req.ToDomain())
+	if err2 != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, " ", err2)
 	}
-	// if err != nil {
 
-	// }
-	return controllers.SuccessResponse(c, _response.FromDomain(user))
+	return controllers.SuccessResponse(c, http.StatusOK)
+
 }

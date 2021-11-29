@@ -2,6 +2,7 @@ package proyek_mitra
 
 import (
 	"investaBackend/business/proyek_mitra"
+	"investaBackend/drivers/databases/investasi"
 
 	"gorm.io/gorm"
 )
@@ -27,11 +28,7 @@ type ProyekMitra struct {
 	UserID               uint   `json:"user_id"`
 	SektorId             uint   `json:"sektor_id"`
 	BankId               uint   `json:"bank_id"`
-	ProyekID             uint   `json:"proyek_id"`
-
-	// Sektor               sektor.Sektor  `gorm:"foreignKey:SektorId" json:"sektor"`
-	// Bank                 bank.Bank      `gorm:"foreignKey:BankCodeId" json:"bank"`
-	// InvestasiUser        []investasi.Investasi
+	InvestasiUser        []investasi.Investasi
 }
 
 func (getData *ProyekMitra) ToDomain() proyek_mitra.Domain {

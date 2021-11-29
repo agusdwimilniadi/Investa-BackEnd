@@ -5,6 +5,7 @@ import (
 	"investaBackend/controllers"
 	"investaBackend/controllers/investasi/request"
 	"investaBackend/controllers/investasi/response"
+	"strconv"
 
 	"net/http"
 
@@ -33,4 +34,15 @@ func (control InvestasiController) InsertInvestasi(c echo.Context) error {
 	}
 	invest, err := control.usecase.InsertInvestasi(insertInvestasi.ToDomainReq(), ctx)
 	return controllers.SuccessResponse(c, response.FromDomain(invest))
+}
+
+func (handler InvestasiController) TotalInvestasiByIdController(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	ctx := c.Request().Context()
+
+	total, err := handler.usecase.TotalInvestasiByIdController(ctx, id)
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, err.Error(), err)
+	}
+	return controllers.SuccessResponse(c, total)
 }
