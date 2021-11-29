@@ -30,7 +30,7 @@ func (repo *UserInvestasiRepository) GetByEmail(ctx context.Context, emailCheck 
 
 func (repo *UserInvestasiRepository) Register(user *user_investasi.Domain, ctx context.Context) error {
 	record := FromDomain(*user)
-	result := repo.db.Create(record).Error
+	result := repo.db.Create(&record).Error
 
 	if result != nil {
 		return result

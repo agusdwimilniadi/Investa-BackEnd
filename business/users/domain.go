@@ -2,18 +2,17 @@ package users
 
 import (
 	"context"
-	"investaBackend/drivers/databases/proyek_mitra"
 
 	"gorm.io/gorm"
 )
 
 type Domain struct {
 	gorm.Model
-	Email      string
-	Name       string
-	Password   string
-	Token      string
-	ProyekUser []proyek_mitra.ProyekMitra
+	Email    string
+	Name     string
+	Password string
+	Token    string
+	// ProyekUser []proyek_mitra.ProyekMitra
 }
 
 type UserUseCaseInterface interface {

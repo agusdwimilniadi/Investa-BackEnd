@@ -28,12 +28,14 @@ func (repo *InvestasiRepository) InsertInvestasi(domain investasi.DomainInvestas
 }
 
 func (repo *InvestasiRepository) TotalInvestasiById(ctx context.Context, id int) (investasi.DomainTotalInvestasi, error) {
-	var total TotalInvestasi
+	// var total TotalInvestasi
 	// result := repo.db.Raw("SELECT SUM(nominal) FROM investasis WHERE proyek_id = ?", id).First(&total).Error
-	results := repo.db.Table("investasis").Where("proyek_id = ?", id).Select("sum(nominal)").Row()
-	result := results.Scan(&total)
-	if result != nil {
-		return investasi.DomainTotalInvestasi{}, result
+	var totalUang TotalInvestasi
+	results := repo.db.Model(&Investasi{}).Select("sum(nominal) as total").Where("proyek_id = ?", id).Find(&totalUang)
+	// result := results
+	if results.Error != nil {
+		return investasi.DomainTotalInvestasi{}, results.Error
 	}
-	return total.ToDomainTotal(), nil
+	// fmt.Println(totalUang)
+	return totalUang.ToDomainTotal(), nil
 }

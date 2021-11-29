@@ -49,6 +49,10 @@ func (uc *UserInvestasiUsecase) Register(ctx context.Context, userDomain *Domain
 	defer cancel()
 
 	existedUser, _ := uc.repo.GetByEmail(ctx, userDomain.Email)
+	// if existedUser.Id != 0 {
+	// 	return errors.New("email sudah digunakan, cari email lain")
+	// }
+
 	if !reflect.DeepEqual(existedUser, Domain{}) {
 		return errors.New("email sudah digunakan, cari email lain")
 	}

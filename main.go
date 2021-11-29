@@ -104,6 +104,7 @@ func main() {
 		UserInvestorController: *userInvestorControllerInterface,
 		InvestasiController:    *investController,
 		ProyekMitraController:  *proyekMitraControllerInterface,
+		JWTConfig:              jwt.Init(),
 	}
 
 	routesInit.RouteRegister(e)

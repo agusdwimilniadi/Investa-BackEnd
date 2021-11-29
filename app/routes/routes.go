@@ -33,7 +33,7 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 
 	// Proyek
 	c.GET("/proyek", controller.ProyekMitraController.GetAllDataProyek)
-	c.POST("/proyek", controller.ProyekMitraController.CreateProyekController)
+	c.POST("/proyek", controller.ProyekMitraController.CreateProyekController, middleware.JWTWithConfig(controller.JWTConfig))
 	c.PUT("/proyek/:id", controller.ProyekMitraController.UpdateProyekController)
 	c.GET("/proyek/:id", controller.ProyekMitraController.GetAllDataByIdController)
 	c.DELETE("/proyek/:id", controller.ProyekMitraController.DeleteProyekController)
