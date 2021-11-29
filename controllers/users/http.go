@@ -4,8 +4,6 @@ import (
 	"investaBackend/business/users"
 	"investaBackend/controllers"
 	"investaBackend/controllers/users/request"
-	"investaBackend/controllers/users/response"
-
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -24,9 +22,6 @@ func NewUserController(uc users.UserUseCaseInterface) *UserController {
 
 func (controller *UserController) Login(c echo.Context) error {
 	ctx := c.Request().Context()
-
-	// emails := c.Request().Header
-	// password := c.Request().Header
 	var userLogin request.UserLogin
 	c.Bind(&userLogin)
 
@@ -43,24 +38,6 @@ func (controller *UserController) Login(c echo.Context) error {
 	}
 
 	return controllers.SuccessResponse(c, responses)
-	// return controllers.SuccessResponse(c,)
-	// var userLogin request.UserLogin
-	// err := c.Bind(&userLogin)
-
-	// if err != nil {
-	// 	return controllers.ErrorResponse(c, http.StatusInternalServerError, "Error bind", err)
-	// }
-	// // hashing, err := encrypt.Hash(userLogin.Password)
-	// user, err := controller.usecase.Login(*userLogin.ToDomain(), ctx)
-	// if err != nil {
-	// 	return controllers.ErrorResponse(c, http.StatusNotFound, "Email password salah", err)
-	// }
-	// // fmt.Println(!encrypt.ValidateHash(userLogin.Password, hashing))
-	// return controllers.SuccessResponse(c, response.FromDomain(user))
-}
-
-func (controller UserController) GetAllUsers(c echo.Context) error {
-	return controllers.SuccessResponse(c, response.UserResponse{})
 }
 
 func (ctrl *UserController) Register(c echo.Context) error {

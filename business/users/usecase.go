@@ -3,10 +3,9 @@ package users
 import (
 	"context"
 	"errors"
-	"reflect"
-
 	_middleware "investaBackend/app/middlewares"
 	"investaBackend/helpers/encrypt"
+	"reflect"
 	"time"
 )
 
@@ -37,7 +36,6 @@ func (usecase *UserUsecase) Login(ctx context.Context, emails, password string) 
 	if err != nil {
 		return "", err
 	}
-	// hash, err := encrypt.Hash(domain.Password)
 	if !encrypt.ValidateHash(password, user.Password) {
 		return "", errors.New("email atau password salah")
 	}

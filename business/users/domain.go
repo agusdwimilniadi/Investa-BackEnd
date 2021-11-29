@@ -18,12 +18,10 @@ type Domain struct {
 
 type UserUseCaseInterface interface {
 	Login(ctx context.Context, email, password string) (string, error)
-	GetAllUsers(ctx context.Context) ([]Domain, error)
 	Register(ctx context.Context, domain *Domain) error
 }
 
 type UserRepoInterface interface {
-	GetAllUsers(ctx context.Context) ([]Domain, error)
 	Register(domain *Domain, ctx context.Context) error
 	GetByEmail(ctx context.Context, email string) (Domain, error)
 }

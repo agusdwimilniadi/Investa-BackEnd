@@ -12,6 +12,7 @@ type UserInvestasiResponse struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
 	Token    string `json:"token"`
+	// Role     string `json:"role" gorm:"default:investor"`
 }
 
 func FromDomain(domain user_investasi.Domain) UserInvestasiResponse {
@@ -26,5 +27,6 @@ func FromDomain(domain user_investasi.Domain) UserInvestasiResponse {
 		Email:    domain.Email,
 		Password: domain.Password,
 		Token:    domain.Token,
+		// Role:     "Investor",
 	}
 }

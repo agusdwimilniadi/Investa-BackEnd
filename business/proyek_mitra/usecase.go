@@ -33,8 +33,32 @@ func (uc *ProyekMitraUseCase) GetAllDataByIdController(ctx context.Context, id i
 	return proyekMitra, nil
 }
 
+func (uc *ProyekMitraUseCase) GetAllDataBySektorController(ctx context.Context, id int) ([]Domain, error) {
+	proyekMitra, err := uc.repo.GetAllDataBySektor(ctx, id)
+	if err != nil {
+		return []Domain{}, err
+	}
+	return proyekMitra, nil
+}
+
 func (uc *ProyekMitraUseCase) CreateProyekController(ctx context.Context, data Domain) (Domain, error) {
 	proyekMitra, err := uc.repo.CreateProyek(ctx, data)
+	if err != nil {
+		return Domain{}, err
+	}
+	return proyekMitra, nil
+}
+
+func (uc *ProyekMitraUseCase) UpdateProyekController(ctx context.Context, data Domain, id int) (Domain, error) {
+	proyekMitra, err := uc.repo.UpdateProyek(ctx, data, id)
+	if err != nil {
+		return Domain{}, err
+	}
+	return proyekMitra, nil
+}
+
+func (uc *ProyekMitraUseCase) DeleteProyekController(ctx context.Context, id int) (Domain, error) {
+	proyekMitra, err := uc.repo.DeleteProyek(ctx, id)
 	if err != nil {
 		return Domain{}, err
 	}

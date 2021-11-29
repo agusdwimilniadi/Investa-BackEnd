@@ -38,6 +38,16 @@ func (handler ProyekMitraController) GetAllDataByIdController(c echo.Context) er
 	}
 	return controllers.SuccessResponse(c, proyekMitra)
 }
+func (handler ProyekMitraController) GetAllDataBySektorController(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	ctx := c.Request().Context()
+
+	proyekMitra, err := handler.ProyekControllerUseCase.GetAllDataBySektorController(ctx, id)
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, err.Error(), err)
+	}
+	return controllers.SuccessResponse(c, proyekMitra)
+}
 
 func (handler ProyekMitraController) CreateProyekController(c echo.Context) error {
 	proyekMitraInsert := proyek_mitra.Domain{}
@@ -49,4 +59,28 @@ func (handler ProyekMitraController) CreateProyekController(c echo.Context) erro
 		return controllers.ErrorResponse(c, http.StatusInternalServerError, err.Error(), err)
 	}
 	return controllers.SuccessResponse(c, proyekMitra)
+}
+
+func (handler ProyekMitraController) UpdateProyekController(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	proyekMitraInsert := proyek_mitra.Domain{}
+	c.Bind(&proyekMitraInsert)
+	ctx := c.Request().Context()
+	proyekMitra, err := handler.ProyekControllerUseCase.UpdateProyekController(ctx, proyekMitraInsert, id)
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, err.Error(), err)
+	}
+	return controllers.SuccessResponse(c, proyekMitra)
+}
+
+func (handler ProyekMitraController) DeleteProyekController(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	ctx := c.Request().Context()
+	_, err := handler.ProyekControllerUseCase.DeleteProyekController(ctx, id)
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, err.Error(), err)
+	}
+	return controllers.SuccessResponse(c, nil)
 }

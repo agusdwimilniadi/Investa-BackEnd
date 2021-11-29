@@ -36,6 +36,14 @@ func (db *ProyekMitraRepository) GetAllDataById(ctx context.Context, id int) (pr
 	return currentProyek.ToDomain(), nil
 }
 
+func (db *ProyekMitraRepository) GetAllDataBySektor(ctx context.Context, id int) ([]proyek_mitra.Domain, error) {
+	var currentProyek []ProyekMitra
+	result := db.db.Where("sektor_id = ?", id).Find(&currentProyek)
+	if result.Error != nil {
+		return []proyek_mitra.Domain{}, result.Error
+	}
+	return ToDomains(currentProyek), nil
+}
 func (db *ProyekMitraRepository) CreateProyek(ctx context.Context, data proyek_mitra.Domain) (proyek_mitra.Domain, error) {
 	insertProyek := FromDomain(data)
 	result := db.db.Create(&insertProyek)
@@ -44,4 +52,24 @@ func (db *ProyekMitraRepository) CreateProyek(ctx context.Context, data proyek_m
 		return proyek_mitra.Domain{}, result.Error
 	}
 	return insertProyek.ToDomain(), nil
+}
+
+func (db *ProyekMitraRepository) UpdateProyek(ctx context.Context, data proyek_mitra.Domain, id int) (proyek_mitra.Domain, error) {
+	currentProyek := FromDomain(data)
+	result := db.db.Where("id = ?", id).Updates(currentProyek).First(&currentProyek)
+
+	if result.Error != nil {
+		return proyek_mitra.Domain{}, result.Error
+	}
+	return currentProyek.ToDomain(), nil
+}
+
+func (db *ProyekMitraRepository) DeleteProyek(ctx context.Context, id int) (proyek_mitra.Domain, error) {
+	var currentProyek ProyekMitra
+	result := db.db.Where("id = ?", id).Delete(&currentProyek)
+
+	if result.Error != nil {
+		return proyek_mitra.Domain{}, result.Error
+	}
+	return currentProyek.ToDomain(), nil
 }

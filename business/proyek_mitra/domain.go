@@ -29,11 +29,18 @@ type Domain struct {
 type Usecase interface {
 	GetAllDataProyek(ctx context.Context) ([]Domain, error)
 	GetAllDataByIdController(ctx context.Context, id int) (Domain, error)
+	GetAllDataBySektorController(ctx context.Context, id int) ([]Domain, error)
+
 	CreateProyekController(ctx context.Context, data Domain) (Domain, error)
+	UpdateProyekController(ctx context.Context, data Domain, id int) (Domain, error)
+	DeleteProyekController(ctx context.Context, id int) (Domain, error)
 }
 
 type Repository interface {
 	GetAllDataProyek(ctx context.Context) ([]Domain, error)
 	GetAllDataById(ctx context.Context, id int) (Domain, error)
+	GetAllDataBySektor(ctx context.Context, id int) ([]Domain, error)
 	CreateProyek(ctx context.Context, data Domain) (Domain, error)
+	UpdateProyek(ctx context.Context, data Domain, id int) (Domain, error)
+	DeleteProyek(ctx context.Context, id int) (Domain, error)
 }
