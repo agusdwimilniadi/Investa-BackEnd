@@ -3,6 +3,8 @@ package routes
 import (
 	bankController "investaBackend/controllers/bank"
 	investasi "investaBackend/controllers/investasi"
+	sektor "investaBackend/controllers/sektor"
+
 	ProyekMitraController "investaBackend/controllers/proyek_mitra"
 	userInvestasiController "investaBackend/controllers/user_investasi"
 	userController "investaBackend/controllers/users"
@@ -17,6 +19,7 @@ type RouteControllerList struct {
 	ProyekMitraController  ProyekMitraController.ProyekMitraController
 	UserInvestorController userInvestasiController.UserInvestasiController
 	InvestasiController    investasi.InvestasiController
+	SektorController       sektor.SektorController
 	JWTConfig              middleware.JWTConfig
 }
 
@@ -44,5 +47,7 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 
 	c.POST("/investasi", controller.InvestasiController.InsertInvestasi, middleware.JWTWithConfig(controller.JWTConfig))
 	c.GET("/investasi/:id", controller.InvestasiController.TotalInvestasiByIdController)
+
+	c.POST("sektor", controller.SektorController.InsertSektor)
 
 }
