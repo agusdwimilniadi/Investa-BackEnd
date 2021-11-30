@@ -1,5 +1,0 @@
-package bank
-
-func TestInsertBank() {
-
-}

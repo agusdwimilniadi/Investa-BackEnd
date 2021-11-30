@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="660afcd5-0aae-47be-919c-0f301a206892" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/__mvc/document.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/config.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/constant/constant.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/bank/bank_controllers.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/investasi/investasiController.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/testing_controllers.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/userInvestasi/userInvestasiController.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/userInvestor/userInvestorController.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/userProyek/userProyekController.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/documents.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/jwt-middlewares.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/log-middlewares.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bankCode.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/investasi.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/jenisSektor.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/proyekMitra.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/response/base_response.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/userInvestasi.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/userProyek.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/route.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business/bank/usecase_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/business/bank/usecase_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
