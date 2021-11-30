@@ -4,16 +4,22 @@ import (
 	_middleware "investaBackend/app/middlewares"
 	"investaBackend/app/routes"
 	bankUsecase "investaBackend/business/bank"
+	sektorUsecase "investaBackend/business/sektor"
+
 	investUseCase "investaBackend/business/investasi"
 	proyekMitraUseCase "investaBackend/business/proyek_mitra"
 
 	userUsecase "investaBackend/business/users"
 	bankController "investaBackend/controllers/bank"
+	sektorController "investaBackend/controllers/sektor"
+
 	investController "investaBackend/controllers/investasi"
 	proyekMitraController "investaBackend/controllers/proyek_mitra"
 
 	userController "investaBackend/controllers/users"
 	bankRepo "investaBackend/drivers/databases/bank"
+	sektorRepo "investaBackend/drivers/databases/sektor"
+
 	proyekMitraRepo "investaBackend/drivers/databases/proyek_mitra"
 
 	investRepo "investaBackend/drivers/databases/investasi"
@@ -22,7 +28,6 @@ import (
 	userInvestasiUsecase "investaBackend/business/user_investasi"
 	userInvestasiController "investaBackend/controllers/user_investasi"
 	proyekMitra "investaBackend/drivers/databases/proyek_mitra"
-	sektorRepo "investaBackend/drivers/databases/sektor"
 	userInvestorRepo "investaBackend/drivers/databases/user_investasi"
 
 	"investaBackend/drivers/mysql"
@@ -90,6 +95,10 @@ func main() {
 	bankUseCaseInterface := bankUsecase.NewBankUseCase(bankRepoInterface, timeoutContext)
 	bankControllerInterface := bankController.NewBankController(bankUseCaseInterface)
 
+	sektorRepoInterface := sektorRepo.NewSektorRepository(db)
+	sektorUseCaseInterface := sektorUsecase.NewSektorUseCase(sektorRepoInterface, timeoutContext)
+	sektorControllerInterface := sektorController.NewSektorController(sektorUseCaseInterface)
+
 	investRepoInterface := investRepo.NewInvestasiRepository(db)
 	investUseCaseInterface := investUseCase.NewInvestasiUseCase(investRepoInterface, timeoutContext)
 	investController := investController.NewInvestasiController(investUseCaseInterface)
@@ -104,6 +113,7 @@ func main() {
 		UserInvestorController: *userInvestorControllerInterface,
 		InvestasiController:    *investController,
 		ProyekMitraController:  *proyekMitraControllerInterface,
+		SektorController:       *sektorControllerInterface,
 		JWTConfig:              jwt.Init(),
 	}
 

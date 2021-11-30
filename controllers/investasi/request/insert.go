@@ -9,7 +9,7 @@ import (
 type InsertInvestasiReq struct {
 	gorm.Model
 	UserInvestasiID uint   `json:"user_investasi_id"`
-	ProyekID        uint   `json:"proyek_id"`
+	ProyekMitraID   uint   `json:"proyek_id"`
 	Nominal         int    `json:"nominal"`
 	LinkBuktiTf     string `json:"link_bukti_tf"`
 }
@@ -23,7 +23,7 @@ func (insert *InsertInvestasiReq) ToDomainReq() investasi.DomainInvestasi {
 			DeletedAt: insert.DeletedAt,
 		},
 		UserInvestasiID: insert.UserInvestasiID,
-		ProyekID:        insert.ProyekID,
+		ProyekMitraID:   insert.ProyekMitraID,
 		Nominal:         insert.Nominal,
 		LinkBuktiTf:     insert.LinkBuktiTf,
 	}

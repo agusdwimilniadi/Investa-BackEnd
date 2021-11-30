@@ -8,12 +8,10 @@ import (
 
 type Investasi struct {
 	gorm.Model
-	UserInvestasiID uint
-	ProyekID        uint
 	Nominal         int
 	LinkBuktiTf     string
-	ProyekMitraId   uint
-	UserInvestasiId uint
+	ProyekMitraID   uint
+	UserInvestasiID uint
 }
 type TotalInvestasi struct {
 	Total int
@@ -33,7 +31,7 @@ func (invest *Investasi) ToDomain() investasi.DomainInvestasi {
 			DeletedAt: invest.DeletedAt,
 		},
 		UserInvestasiID: invest.UserInvestasiID,
-		ProyekID:        invest.ProyekID,
+		ProyekMitraID:   invest.ProyekMitraID,
 		Nominal:         invest.Nominal,
 		LinkBuktiTf:     invest.LinkBuktiTf,
 	}
@@ -53,7 +51,7 @@ func FromDomain(invest investasi.DomainInvestasi) Investasi {
 			DeletedAt: invest.DeletedAt,
 		},
 		UserInvestasiID: invest.UserInvestasiID,
-		ProyekID:        invest.ProyekID,
+		ProyekMitraID:   invest.ProyekMitraID,
 		Nominal:         invest.Nominal,
 		LinkBuktiTf:     invest.LinkBuktiTf,
 	}
