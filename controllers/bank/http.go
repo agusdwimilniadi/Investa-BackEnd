@@ -5,7 +5,6 @@ import (
 	"investaBackend/controllers"
 	"investaBackend/controllers/bank/request"
 	"investaBackend/controllers/bank/response"
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -29,10 +28,7 @@ func (controller BankController) InsertBank(c echo.Context) error {
 	if err != nil {
 		return controllers.ErrorResponse(c, http.StatusInternalServerError, "Error bind", err)
 	}
-	log.Println("sebelum insert ke db")
-	log.Println(insertBank)
 	banks, err := controller.usecase.InsertBank(insertBank.ToDomain(), ctx)
-	log.Println("setelah insert ke db")
 	if err != nil {
 		return controllers.ErrorResponse(c, http.StatusInternalServerError, "Data bank kosong", err)
 	}

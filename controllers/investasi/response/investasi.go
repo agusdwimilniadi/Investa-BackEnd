@@ -9,7 +9,7 @@ import (
 type InvestasiResponse struct {
 	gorm.Model
 	UserInvestasiID uint   `json:"user_investasi_id"`
-	ProyekID        uint   `json:"proyek_id"`
+	ProyekMitraId   uint   `json:"proyek_id"`
 	Nominal         int    `json:"nominal"`
 	LinkBuktiTf     string `json:"link_bukti_tf"`
 }
@@ -23,7 +23,7 @@ func FromDomain(domain investasi.DomainInvestasi) InvestasiResponse {
 			DeletedAt: domain.DeletedAt,
 		},
 		UserInvestasiID: domain.UserInvestasiID,
-		ProyekID:        domain.ProyekID,
+		ProyekMitraId:   domain.ProyekMitraID,
 		Nominal:         domain.Nominal,
 		LinkBuktiTf:     domain.LinkBuktiTf,
 	}

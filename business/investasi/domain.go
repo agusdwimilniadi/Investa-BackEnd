@@ -9,7 +9,7 @@ import (
 type DomainInvestasi struct {
 	gorm.Model
 	UserInvestasiID uint
-	ProyekID        uint
+	ProyekMitraID   uint
 	Nominal         int
 	LinkBuktiTf     string
 	// Proyek          proyek_mitra.ProyekMitra

@@ -31,7 +31,7 @@ func (repo *InvestasiRepository) TotalInvestasiById(ctx context.Context, id int)
 	// var total TotalInvestasi
 	// result := repo.db.Raw("SELECT SUM(nominal) FROM investasis WHERE proyek_id = ?", id).First(&total).Error
 	var totalUang TotalInvestasi
-	results := repo.db.Model(&Investasi{}).Select("sum(nominal) as total").Where("proyek_id = ?", id).Find(&totalUang)
+	results := repo.db.Model(&Investasi{}).Select("sum(nominal) as total").Where("proyek_mitra_id = ?", id).Find(&totalUang)
 	// result := results
 	if results.Error != nil {
 		return investasi.DomainTotalInvestasi{}, results.Error
