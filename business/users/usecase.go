@@ -44,10 +44,6 @@ func (usecase *UserUsecase) Login(ctx context.Context, emails, password string) 
 	return tokens, nil
 }
 
-func (usecase *UserUsecase) GetAllUsers(ctx context.Context) ([]Domain, error) {
-	return []Domain{}, nil
-}
-
 func (uc *UserUsecase) Register(ctx context.Context, userDomain *Domain) error {
 	ctx, cancel := context.WithTimeout(ctx, uc.ctx)
 	defer cancel()
