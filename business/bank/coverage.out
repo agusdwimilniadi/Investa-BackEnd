@@ -1,0 +1,5 @@
+mode: set
+investaBackend/business/bank/usecase.go:13.80,18.2 1 1
+investaBackend/business/bank/usecase.go:20.92,23.16 2 1
+investaBackend/business/bank/usecase.go:26.2,26.19 1 1
+investaBackend/business/bank/usecase.go:23.16,25.3 1 0

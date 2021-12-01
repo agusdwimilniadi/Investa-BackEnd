@@ -30,7 +30,6 @@ type Usecase interface {
 	GetAllDataProyek(ctx context.Context) ([]Domain, error)
 	GetAllDataByIdController(ctx context.Context, id int) (Domain, error)
 	GetAllDataBySektorController(ctx context.Context, id int) ([]Domain, error)
-
 	CreateProyekController(ctx context.Context, data Domain) (Domain, error)
 	UpdateProyekController(ctx context.Context, data Domain, id int) (Domain, error)
 	DeleteProyekController(ctx context.Context, id int) (Domain, error)
