@@ -20,8 +20,6 @@ import (
 	bankRepo "investaBackend/drivers/databases/bank"
 	sektorRepo "investaBackend/drivers/databases/sektor"
 
-	proyekMitraRepo "investaBackend/drivers/databases/proyek_mitra"
-
 	investRepo "investaBackend/drivers/databases/investasi"
 	userRepo "investaBackend/drivers/databases/users"
 
@@ -41,7 +39,7 @@ import (
 )
 
 func init() {
-	viper.SetConfigFile("app/config/config.json")
+	viper.SetConfigFile("config.json")
 	err := viper.ReadInConfig()
 
 	if err != nil {
@@ -103,7 +101,7 @@ func main() {
 	investUseCaseInterface := investUseCase.NewInvestasiUseCase(investRepoInterface, timeoutContext)
 	investController := investController.NewInvestasiController(investUseCaseInterface)
 
-	proyekMitraInterface := proyekMitraRepo.NewProyekMitraRepository(db)
+	proyekMitraInterface := proyekMitra.NewProyekMitraRepository(db)
 	proyekMitraUseCaseInterface := proyekMitraUseCase.NewProyekMitraUseCase(proyekMitraInterface, timeoutContext)
 	proyekMitraControllerInterface := proyekMitraController.NewProyekMitraController(proyekMitraUseCaseInterface)
 

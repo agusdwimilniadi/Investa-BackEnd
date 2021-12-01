@@ -7,9 +7,9 @@
       "timeout":2
     },
     "database": {
-        "host": "localhost",
+        "host": "investa.cz0wngyz5oar.us-east-2.rds.amazonaws.com",
         "port": "3306",
-        "user": "root",
+        "user": "admin",
         "pass": "123edsaq1",
         "name": "investa_backend_test"
     },
