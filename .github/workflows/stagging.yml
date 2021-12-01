@@ -29,3 +29,26 @@ jobs :
           password: ${{ SECRETS.DOCKERHUB_PASSWORD }}
       - name: push image to dockerhub
         run: docker push agusdwimilniadi/investa_backend:latest
+  deployment:
+    name: "Deploy to ec2"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name : configuration ssh
+        env:
+          SSH_USER : ${{ SECRETS.SSH_USERNAME }}
+          SSH_KEY: ${{ SECRETS.INVESTA_BACKEND_PEM }}
+          SSH_HOST: ${{ SECRETS. }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/InvestaBackend.pem
+          chmod 700 ~/.ssh/InvestaBackend.pem
+          cat >> ~/.ssh/config << END
+          Host development
+            Host_name : $SSH_HOST
+            User : $SSH_USER
+            IndentitiyFile ~/.ssh/InvestaBackend.pem
+            StrictHostKeyCheking=no
+          END
+      - name: connect ec2, remove container, pull from registry and start
+        run: ssh development 'docker rm -f $(docker ps -a -q)' || true && docker pull agusdwimilniadi/investa_backend:latest && docker run -p 8000:8000 --name inveta_backend agusdwimilniadi/investa_backend:latest
