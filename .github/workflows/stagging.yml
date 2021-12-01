@@ -47,10 +47,10 @@ jobs :
           chmod 700 ~/.ssh/InvestaBackend.pem
           cat >> ~/.ssh/config << END
           Host development
-            Host_name : $SSH_HOST
-            User : $SSH_USER
-            IndentitiyFile ~/.ssh/InvestaBackend.pem
-            StrictHostKeyCheking=no
+            HostName $SSH_HOST
+            User  $SSH_USER
+            IdentityFile ~/.ssh/InvestaBackend.pem
+            StrictHostKeyChecking=no
           END
-      - name: connect ec2, remove container, pull from registry and start
-        run: ssh development 'docker rm -f $(docker ps -a -q) || true && docker pull agusdwimilniadi/investa_backend:latest && docker run -d -p 8000:8000 --name inveta_backend agusdwimilniadi/investa_backend:latest'
+      - name: connect ec2, remove container, pull from registry, and start
+        run: ssh development 'docker rm -f $(docker ps -a -q) || true && docker pull agusdwimilniadi/investa_backend:latest && docker run -d -p 8000:8000 --name investa_backend agusdwimilniadi/investa_backend:latest'
