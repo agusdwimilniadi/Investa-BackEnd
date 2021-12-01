@@ -38,7 +38,7 @@ jobs :
         env:
           SSH_USER : ${{ SECRETS.SSH_USERNAME }}
           SSH_KEY: ${{ SECRETS.INVESTA_BACKEND_PEM }}
-          SSH_HOST: ${{ SECRETS. }}
+          SSH_HOST: ${{ SECRETS.SSH_HOST }}
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/InvestaBackend.pem
