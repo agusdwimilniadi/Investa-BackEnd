@@ -2,7 +2,7 @@ name : "running unit test, build docker image, push ec2"
 on :
   push:
     branches:
-      - "7_Deploy"
+      - "main"
 jobs :
   unit-test:
     name: "unit test"
