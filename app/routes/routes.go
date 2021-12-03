@@ -43,6 +43,7 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 	c.GET("/proyek/sektor/:id", controller.ProyekMitraController.GetAllDataBySektorController)
 	// c.GET("/proyek/total/:id", controller.ProyekMitraController.GetAllDataBySektorController)
 
+	c.GET("/bank", controller.BankController.GetAllDataBank, middleware.JWTWithConfig(controller.JWTConfig))
 	c.POST("/bank", controller.BankController.InsertBank, middleware.JWTWithConfig(controller.JWTConfig))
 
 	c.POST("/investasi", controller.InvestasiController.InsertInvestasi, middleware.JWTWithConfig(controller.JWTConfig))

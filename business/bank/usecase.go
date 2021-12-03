@@ -25,3 +25,11 @@ func (usecase *BankUseCase) InsertBank(domain Domain, ctx context.Context) (Doma
 	}
 	return banks, nil
 }
+func (usecase *BankUseCase) GetAllDataBank(ctx context.Context) ([]Domain, error) {
+	banks, err := usecase.repo.GetAllDataBank(ctx)
+
+	if err != nil {
+		return []Domain{}, err
+	}
+	return banks, nil
+}

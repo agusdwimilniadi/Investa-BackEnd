@@ -3,6 +3,13 @@ investaBackend/business/bank/usecase.go:13.80,18.2 1 1
 investaBackend/business/bank/usecase.go:20.92,23.16 2 1
 investaBackend/business/bank/usecase.go:26.2,26.19 1 1
 investaBackend/business/bank/usecase.go:23.16,25.3 1 0
+investaBackend/business/investasi/usecase.go:13.90,18.2 1 1
+investaBackend/business/investasi/usecase.go:20.120,23.16 2 1
+investaBackend/business/investasi/usecase.go:26.2,26.20 1 1
+investaBackend/business/investasi/usecase.go:23.16,25.3 1 0
+investaBackend/business/investasi/usecase.go:28.117,30.16 2 0
+investaBackend/business/investasi/usecase.go:33.2,33.19 1 0
+investaBackend/business/investasi/usecase.go:30.16,32.3 1 0
 investaBackend/business/users/usecase.go:18.130,24.2 1 0
 investaBackend/business/users/usecase.go:26.97,27.18 1 0
 investaBackend/business/users/usecase.go:30.2,30.20 1 0

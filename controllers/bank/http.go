@@ -35,3 +35,20 @@ func (controller BankController) InsertBank(c echo.Context) error {
 
 	return controllers.SuccessResponse(c, response.FromDomain(banks))
 }
+
+func (controller BankController) GetAllDataBank(c echo.Context) error {
+	ctx := c.Request().Context()
+	getData, err := controller.usecase.GetAllDataBank(ctx)
+
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, "Fail", err)
+	}
+	var responses []response.InsertBankResponse
+	for _, val := range getData {
+		responses = append(responses, response.FromDomain(val))
+	}
+	return controllers.SuccessResponse(c, map[string]interface{}{
+		"proyek": responses,
+	})
+	// return controllers.SuccessResponse(c, getData)
+}

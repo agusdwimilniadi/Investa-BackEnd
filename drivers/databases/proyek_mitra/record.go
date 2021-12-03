@@ -28,7 +28,7 @@ type ProyekMitra struct {
 	UserID               uint   `json:"user_id"`
 	SektorId             uint   `json:"sektor_id"`
 	BankId               uint   `json:"bank_id"`
-	InvestasiUser        investasi.Investasi
+	InvestasiUser        []investasi.Investasi
 }
 
 func (getData *ProyekMitra) ToDomain() proyek_mitra.Domain {
