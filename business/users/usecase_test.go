@@ -2,12 +2,10 @@ package users_test
 
 import (
 	"errors"
-	middleware "investaBackend/app/middlewares"
 	"investaBackend/business/proyek_mitra"
 	"investaBackend/business/users"
 	"investaBackend/business/users/mocks"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/mock"
 	"gorm.io/gorm"
@@ -15,17 +13,17 @@ import (
 
 var (
 	userRepoInterfaceMock mocks.UserRepoInterface
-	userUseCaseInterface  users.UserUseCaseInterface
+	userUseCaseInterface  users.UserUsecase
 	userDataDummyLogin    users.Domain
 	proyekDomain          proyek_mitra.Domain
 )
 
 func setup() {
-	configJWT := middleware.ConfigJWT{
-		SecretJWT:       "123",
-		ExpiresDuration: 2,
-	}
-	userUseCaseInterface = users.NewUsecase(&userRepoInterfaceMock, time.Hour*1, &configJWT)
+	// configJWT := middleware.ConfigJWT{
+	// 	SecretJWT:       "123",
+	// 	ExpiresDuration: 2,
+	// }
+	// userUseCaseInterface = users.NewUsecase(&userRepoInterfaceMock, time.Hour*1, &configJWT)
 	userDataDummyLogin = users.Domain{
 		Model: gorm.Model{
 			ID: 1,
@@ -43,6 +41,7 @@ func TestRegister(t *testing.T) {
 	t.Run("Succes Register", func(t *testing.T) {
 		userRepoInterfaceMock.On("Register", mock.AnythingOfType("int"), mock.Anything).Return(errors.New("Error")).Once()
 		// usersTest, err := userUseCaseInterface.Register(context.Background(), users.Domain)
+		// usersTest, err := userUseCaseInterface.Register(co)
 
 	})
 
@@ -55,6 +54,6 @@ func TestRegister(t *testing.T) {
 	// assert.Equal(t, usersTest, users.Domain{})
 
 }
-func TestGetByEmail() {
+func TestGetByEmail(t *testing.T) {
 
 }
