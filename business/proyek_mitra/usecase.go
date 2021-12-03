@@ -2,6 +2,7 @@ package proyek_mitra
 
 import (
 	"context"
+	"errors"
 	"time"
 )
 
@@ -28,7 +29,7 @@ func (uc *ProyekMitraUseCase) GetAllDataProyek(ctx context.Context) ([]Domain, e
 func (uc *ProyekMitraUseCase) GetAllDataByIdController(ctx context.Context, id int) (Domain, error) {
 	proyekMitra, err := uc.repo.GetAllDataById(ctx, id)
 	if err != nil {
-		return Domain{}, err
+		return Domain{}, errors.New("Error")
 	}
 	return proyekMitra, nil
 }

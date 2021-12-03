@@ -2,6 +2,7 @@ package bank
 
 import (
 	"context"
+	"errors"
 	"time"
 )
 
@@ -29,7 +30,7 @@ func (usecase *BankUseCase) GetAllDataBank(ctx context.Context) ([]Domain, error
 	banks, err := usecase.repo.GetAllDataBank(ctx)
 
 	if err != nil {
-		return []Domain{}, err
+		return []Domain{}, errors.New("Error")
 	}
 	return banks, nil
 }
